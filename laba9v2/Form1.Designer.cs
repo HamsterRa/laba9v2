@@ -37,9 +37,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox1.Location = new System.Drawing.Point(312, 136);
+            this.pictureBox1.Location = new System.Drawing.Point(319, 88);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1056, 654);
+            this.pictureBox1.Size = new System.Drawing.Size(1062, 700);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -48,9 +48,9 @@
             this.listBoxHistory.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.listBoxHistory.FormattingEnabled = true;
             this.listBoxHistory.ItemHeight = 25;
-            this.listBoxHistory.Location = new System.Drawing.Point(-2, 136);
+            this.listBoxHistory.Location = new System.Drawing.Point(-2, 88);
             this.listBoxHistory.Name = "listBoxHistory";
-            this.listBoxHistory.Size = new System.Drawing.Size(321, 654);
+            this.listBoxHistory.Size = new System.Drawing.Size(321, 704);
             this.listBoxHistory.TabIndex = 1;
             // 
             // textBoxConsole
@@ -58,7 +58,7 @@
             this.textBoxConsole.Location = new System.Drawing.Point(-2, 3);
             this.textBoxConsole.Multiline = true;
             this.textBoxConsole.Name = "textBoxConsole";
-            this.textBoxConsole.Size = new System.Drawing.Size(1370, 140);
+            this.textBoxConsole.Size = new System.Drawing.Size(1370, 88);
             this.textBoxConsole.TabIndex = 2;
             this.textBoxConsole.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxConsole_KeyDown);
             // 

@@ -47,34 +47,91 @@ namespace laba9v2
                 {
                     Stack<string> stack = new Stack<string>();
                     string sym = "";
-                    for (int i = 0; i < textBoxConsole.Text.Length; i++)
-                    {
-                        stack.Push(textBoxConsole.Text[i].ToString());
-                    }
                     bool fl = false;
                     string st = "";
-                    for (int i = 0; i < textBoxConsole.Text.Length; i++)
+                    foreach (char c in textBoxConsole.Text)
                     {
-                        sym = stack.Pop();
-                        if (fl)
+                        if (c == 'S' || c == 'M' || c == 'I')
                         {
-                            st += sym;
+                            stack.Push(c.ToString());
                         }
-                        if (sym == "S" || sym == "M" || sym == "I")
-                        {
-                            stack.Push(sym);
-                        }
-                        if (sym == ";")
-                        {
-                            stack.Push(st);
-                            st = "";
-                        }
-                        if (sym == "[" || sym == "]")
+                        if (c == '[')
                         {
                             fl = true;
-                            sym = "";
+                           // stack.Push(c.ToString());
+                        }
+                        else if (c == ']')
+                        {
+                            fl = false;
+                            st = st.Trim();
+                            stack.Push(st);
+                            //stack.Push(c.ToString());
+                            st = "";
+                        }
+                        else if (c == ' ')
+                        {
+                            continue;
+                        }
+                        else if (c == ';')
+                        {
+                            st = st.Trim();
+                            if (st != "")
+                            {
+                                stack.Push(st);
+                                st = "";
+                            }
+                            //stack.Push(c.ToString());
+                        }
+                        else
+                        {
+                            st += c;
                         }
                     }
+                    if (st != "")
+                    {
+                        st = st.Trim();
+                        stack.Push(st);
+                    }
+                    Stack<string> reversedStack = new Stack<string>();
+                    string sym1 = "";
+                    for (int i = 0; i < textBoxConsole.Text.Length; i++)
+                    {
+                        if (textBoxConsole.Text[i] == 'S' || textBoxConsole.Text[i] == 'M' || textBoxConsole.Text[i] == 'I')
+                        {
+                            stack.Push(textBoxConsole.Text[i].ToString());
+                        }
+                        if (textBoxConsole.Text[i] == '[')
+                        {
+                            // stack.Push(c.ToString());
+                        }
+                        else if (textBoxConsole.Text[i] == ']')
+                        {
+                            sym = "";
+                        }
+                        else if (textBoxConsole.Text[i] == ' ')
+                        {
+                            continue;
+                        }
+                        else if (textBoxConsole.Text[i] == ';')
+                        {
+                            sym = "";
+                        }
+                        else
+                        {
+                            sym += textBoxConsole.Text[i];
+                        }
+                    }
+
+                    while (stack.Count > 0)
+                    {
+                        reversedStack.Push(stack.Pop());
+                    }
+
+                    // поменять местами ссылки на первый и второй стеки
+                    stack = reversedStack;
+
+
+
                     string sym_of_com = stack.Pop().ToUpper();
                     if ((sym_of_com == "S" || sym_of_com == "M" || sym_of_com == "I"))
                     {
@@ -123,18 +180,40 @@ namespace laba9v2
                         // Увеличение фигуры
                         if (sym_of_com == "I")
                         {
-                           
+                            Rectengular figyra;
+                            for (int i = 0; i < ShapeContainer.figureList.Count; i++)
+                            {
+                                if (ShapeContainer.figureList[i].name == stack.Pop())
+                                {
+                                    figyra = ShapeContainer.figureList[i];
+                                    int scale = I(stack.Pop());
+                                    if (scale > 0)
+                                    {
+                                        figyra.Scale(scale);
+                                        listBoxHistory.Items.Add(textBoxConsole.Text);
+                                        for (int j = 0; j < ShapeContainer.figureList.Count; j++)
+                                        {
+                                            ShapeContainer.figureList[j].Draw();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        listBoxHistory.Items.Add("Неверный коэффициент масштабирования.");
+                                    }
+                                }
+                            }
                         }
+
                     }
                     else
                     {
-                        listBoxHistory.Items.Add("Неизвестная операция");
+                        listBoxHistory.Items.Add("Неизвестная операция2");
                     }
                 }
 
                 catch
                 {
-                    listBoxHistory.Items.Add("Неизвестная операция");
+                    listBoxHistory.Items.Add("Неизвестная операция1");
                 } 
             }
         }
