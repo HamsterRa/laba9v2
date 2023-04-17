@@ -30,40 +30,51 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.listBoxHistory = new System.Windows.Forms.ListBox();
+            this.textBoxConsole = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox1.Location = new System.Drawing.Point(325, 136);
+            this.pictureBox1.Location = new System.Drawing.Point(312, 136);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1050, 654);
+            this.pictureBox1.Size = new System.Drawing.Size(1056, 654);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // listBoxHistory
             // 
+            this.listBoxHistory.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.listBoxHistory.FormattingEnabled = true;
             this.listBoxHistory.ItemHeight = 25;
             this.listBoxHistory.Location = new System.Drawing.Point(-2, 136);
             this.listBoxHistory.Name = "listBoxHistory";
             this.listBoxHistory.Size = new System.Drawing.Size(321, 654);
             this.listBoxHistory.TabIndex = 1;
-            this.listBoxHistory.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // textBoxConsole
+            // 
+            this.textBoxConsole.Location = new System.Drawing.Point(-2, 3);
+            this.textBoxConsole.Multiline = true;
+            this.textBoxConsole.Name = "textBoxConsole";
+            this.textBoxConsole.Size = new System.Drawing.Size(1370, 140);
+            this.textBoxConsole.TabIndex = 2;
+            this.textBoxConsole.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxConsole_KeyDown);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1371, 785);
+            this.Controls.Add(this.textBoxConsole);
             this.Controls.Add(this.listBoxHistory);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -71,5 +82,6 @@
 
         private PictureBox pictureBox1;
         private ListBox listBoxHistory;
+        private TextBox textBoxConsole;
     }
 }
