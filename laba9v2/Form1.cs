@@ -15,6 +15,14 @@ namespace laba9v2
             Init.pen = pen;
             ShapeContainer shapeContainer = new ShapeContainer();
         }
+        private void ClearForm()
+        {
+            using (Graphics graphics = pictureBox1.CreateGraphics())
+            {
+                graphics.Clear(Color.White);
+            }
+        }
+
         internal class Init
         {
             public static Bitmap bitmap;
@@ -55,70 +63,72 @@ namespace laba9v2
                         {
                             stack.Push(c.ToString());
                         }
-                        if (c == '[')
+                        else if (c == '[')
                         {
-                            fl = true;
-                           // stack.Push(c.ToString());
-                        }
-                        else if (c == ']')
-                        {
-                            fl = false;
-                            st = st.Trim();
-                            stack.Push(st);
-                            //stack.Push(c.ToString());
-                            st = "";
-                        }
-                        else if (c == ' ')
-                        {
-                            continue;
-                        }
-                        else if (c == ';')
-                        {
-                            st = st.Trim();
                             if (st != "")
                             {
                                 stack.Push(st);
                                 st = "";
                             }
-                            //stack.Push(c.ToString());
+                            fl = true;
+                        }
+                        else if (c == ']')
+                        {
+                            fl = false;
+                            if (st != "")
+                            {
+                                stack.Push(st);
+                                st = "";
+                            }
+                        }
+                        else if (c == ' ' || c == ';')
+                        {
+                            if (st != "")
+                            {
+                                stack.Push(st);
+                                st = "";
+                            }
+                            continue;
                         }
                         else
                         {
                             st += c;
                         }
                     }
+
                     if (st != "")
                     {
-                        st = st.Trim();
                         stack.Push(st);
                     }
+
                     Stack<string> reversedStack = new Stack<string>();
-                    string sym1 = "";
-                    for (int i = 0; i < textBoxConsole.Text.Length; i++)
+
+                    for (int i = textBoxConsole.Text.Length - 1; i >= 0; i--)
                     {
                         if (textBoxConsole.Text[i] == 'S' || textBoxConsole.Text[i] == 'M' || textBoxConsole.Text[i] == 'I')
                         {
                             stack.Push(textBoxConsole.Text[i].ToString());
                         }
-                        if (textBoxConsole.Text[i] == '[')
-                        {
-                            // stack.Push(c.ToString());
-                        }
-                        else if (textBoxConsole.Text[i] == ']')
-                        {
-                            sym = "";
-                        }
                         else if (textBoxConsole.Text[i] == ' ')
                         {
+                            if (sym != "")
+                            {
+                                stack.Push(sym);
+                                sym = "";
+                            }
                             continue;
                         }
                         else if (textBoxConsole.Text[i] == ';')
                         {
-                            sym = "";
+                            if (sym != "")
+                            {
+                                stack.Push(sym);
+                                sym = "";
+                            }
                         }
                         else
                         {
-                            sym += textBoxConsole.Text[i];
+                            sym = textBoxConsole.Text[i] + sym;
                         }
                     }
 
@@ -127,13 +137,11 @@ namespace laba9v2
                         reversedStack.Push(stack.Pop());
                     }
 
-                    // поменять местами ссылки на первый и второй стеки
+                    // Поменять местами ссылки на первый и второй стеки
                     stack = reversedStack;
 
-
-
                     string sym_of_com = stack.Pop().ToUpper();
-                    if ((sym_of_com == "S" || sym_of_com == "M" || sym_of_com == "I"))
+                    if (sym_of_com == "S" || sym_of_com == "M" || sym_of_com == "I")
                     {
                         // Создание фигуры
                         if (sym_of_com == "S")
@@ -214,8 +222,13 @@ namespace laba9v2
                 catch
                 {
                     listBoxHistory.Items.Add("Неизвестная операция1");
-                } 
+                }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ClearForm();
         }
     }
 }
